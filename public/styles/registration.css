@@ -1,0 +1,97 @@
+@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;800;900&display=swap);
+
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.form-outer-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100vh;
+}
+
+.form-outer-container .form-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.form-outer-container .form-wrapper,.form-outer-container .illustrator-container {
+    padding: 1rem 5rem;
+    max-width: 100%;
+}
+.form-outer-container .illustrator-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+}
+
+.form-outer-container .form-wrapper img {
+    width: 10rem;
+}
+.form-outer-container .form-wrapper h1 {
+    color: #1F41BB;
+    margin: 0 0 1rem;
+}
+.form-outer-container .illustrator-container img {
+    width: 100%;
+}
+.form-outer-container .form-wrapper form {
+    width: 100%;
+}
+.form-outer-container .form-wrapper .input-container{
+    color: #0E6545;
+}
+.form-outer-container .form-wrapper .input-container input,
+.form-outer-container .form-wrapper .input-container select,
+.form-outer-container .form-wrapper button {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    border: 2px solid #1F41BB;
+    border-radius: 1.5rem;
+    font-size: medium;
+}
+.form-outer-container .form-wrapper button {
+    background-color: #1F41BB;
+    color: white;
+    font-weight: 700;
+    font-size: large;
+    margin: 1rem 0;
+}
+
+.form-outer-container .form-wrapper form a {
+    text-decoration: none;
+    color: blue;
+}
+.form-outer-container .form-wrapper form p{
+    padding: 0;
+    margin: 0 ;
+}
+
+/* Add lost Item styling start */
+.form-outer-container .form-wrapper .input-container input[type="file"] {
+    padding: 0;
+}
+
+.form-outer-container .form-wrapper .input-container input::-webkit-file-upload-button {
+    padding: 0.5rem;
+    background-color: #1F41BB;
+    color: white;
+    border: 1px solid #1F41BB;
+}
+
+.form-outer-container.add-lost-item .form-wrapper img {
+    width: 5rem;
+}
+
+.form-outer-container.add-lost-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

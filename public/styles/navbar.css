@@ -1,0 +1,55 @@
+@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;800;900&display=swap);
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* top navigation bar begin */
+
+.top-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 10;
+}
+.top-navbar .logo {
+    width: 80px;
+}
+.top-navbar .logo img {
+    width: 100%;
+}
+.top-navbar .mid-links {
+    display: flex;
+    list-style-type: none;
+    align-items: center;
+}
+.top-navbar .nav-item {
+    padding: 0 10px;
+    text-align: center;
+}
+.top-navbar .nav-item .nav-link {
+    padding: 5px 0;
+    color: black;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+}
+
+.top-navbar .nav-item .nav-link:hover {
+    color: #1F41BB;
+    border-bottom: 2px solid;
+}
+
+.top-navbar .profile-link {
+    padding: 5px 35px;
+    background-color: #1F41BB;
+    border-radius: 20px;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+}
+
+/* Top Navigation Bar ends!!!!!!! */

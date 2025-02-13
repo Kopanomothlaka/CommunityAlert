@@ -1,0 +1,190 @@
+@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;800;900&display=swap);
+
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  width: 100vw;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* Hero section begin */
+
+.hero-section {
+    background: url('/assets/images/hero_section_background_image.jpeg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.hero-section .text-container {
+    padding: 6rem;
+    padding-top: 8rem;
+    background-color: #11111091;
+}
+
+.hero-section .text-container .text-content {
+    width: 50%;
+    color: white;
+}
+.hero-section .text-container .text-content h1 {
+    font-size: 3.5rem;
+    font-weight: 600;
+    margin: 0px;
+    padding: 0px;
+}
+.hero-section .text-container .text-content h1 span {
+    color: #1F41BB;
+}
+.hero-section .text-container .text-content p{
+    font-size: larger;
+}
+.hero-section .text-container .text-content a {
+    text-decoration: none;
+    color: white;
+    background-color: #1F41BB;
+    padding: 8px 25px;
+    border-radius: 25px;
+    display: inline-block;
+    font-size: large;
+}
+
+/* Hero section ends!!! */
+
+/* News and Updates Sections Starts */
+
+.news-update-section {
+    padding: 2rem 4.5rem;
+    width: 100%;
+}
+
+.news-update-section h1, .lecturers-section h1 {
+    color: #1F41BB;
+}
+
+.news-update-section .news-card-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4rem;
+    border-radius: 25px;
+    margin-top: 20px;
+}
+
+.news-update-section .news-card-container .news-card{
+    border-radius: 25px;
+    box-shadow: 0px 5px 10px 0px #aaa;
+}
+
+.news-update-section .news-card-container .news-card-img img {
+    width: 100%;
+
+}
+
+.news-update-section .news-card-content {
+    padding: 0 1rem;
+    padding-bottom: 1rem;
+}
+
+.news-update-section .news-card-content h4 {
+    padding: 0;
+    margin: 0;
+}
+
+.news-update-section .news-card-content p {
+    margin: 0;
+    font-size: small;
+}
+
+.news-update-section .news-card-content a {
+    color: #1F41BB;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+    display: inline-block;
+}
+
+.news-update-section .news-card-content a:hover {
+    text-decoration: underline;
+}
+
+.line {
+    height: 5px;
+    background-color: #000;
+    margin: 1.5rem 0;
+}
+
+.header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.header input {
+    outline: none;
+    font-size: x-large;
+    padding: 10px 20px;
+    border-radius: 25px;
+    width: 0;
+    border: 2px solid transparent;
+    transition: 0.5s ease-in-out;
+}
+
+.header input.active {
+    width: 450px;
+    border: 2px solid #1F41BB;
+}
+
+.search-form {
+    position: relative;
+}
+.header .cancel-button {
+    background-color: #1F41BB;
+    border: none;
+    color: white;
+    outline: none;
+    display: none;
+}
+.header .cancel-button,
+.header .search-button {
+    position: absolute;
+    font-size: x-large;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    border: none;
+    right: 1px;
+    top: 1px;
+    cursor: pointer;
+    transition: 0.5s ease-in-out;
+}
+
+
+
+.header .cancel-button.active {
+    display: block;
+}
+
+.header .search-button {
+    display: none;
+    color: #1F41BB;
+}
+
+.header .search-button.active {
+    display: block;
+}
+/*******\\\\ News and Updates section ends!!!!!\\\\\ ******/
+.navbar .nav-link {
+    color: #000; /* Default link color */
+    transition: color 0.3s;
+}
+
+.navbar .nav-link:hover {
+    color: #1F41BB; /* Hover color */
+}
