@@ -18,6 +18,23 @@ Route::prefix('admin')->group(function () {
         return view('admin.pages.welcome');
     })->name('admin.pages.welcome');
 
+    //call the charts page
+    //call the users page
+    Route::get('/pages/chats', function () {
+        return view('admin.pages.chats');
+    })->name('admin.pages.chats');
+
+    //call the users page
+    Route::get('/pages/users', function () {
+        return view('admin.pages.users');
+    })->name('admin.pages.users');
+
+    //call the profile page
+    Route::get('/pages/profile', function () {
+        return view('admin.pages.profile');
+    })->name('admin.pages.profile');
+
+
 
     // Protected routes
     Route::middleware('auth:admin')->group(function () {
