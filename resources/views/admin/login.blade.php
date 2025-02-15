@@ -79,27 +79,38 @@
 
                 <h1 class="mb-4">Community Alert Login</h1>
 
-                <form action="" method="POST" class="needs-validation" novalidate>
+                <form action="{{ route('admin.login.submit') }}" method="POST" class="needs-validation" novalidate>
                     @csrf
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" name="email" id="email" class="form-control" required>
+                        <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" required>
+                        @error('email')
                         <div class="invalid-feedback">
-                            Please enter a valid email address.
+                            {{ $message }}
                         </div>
+                        @enderror
                     </div>
 
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" name="password" id="password" class="form-control" required>
+                        <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror" required>
+                        @error('password')
                         <div class="invalid-feedback">
-                            Please enter your password.
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="remember" id="remember">
+                            <label class="form-check-label" for="remember">
+                                Remember Me
+                            </label>
                         </div>
                     </div>
 
-                    <p class="mt-3">Forgot password? <a href="">Reset</a></p>
                     <button type="submit" class="btn btn-primary btn-block">LOGIN</button>
-                    <p class="mt-3 text-center">You don't have an account? <a href="/registration">Create account</a></p>
                 </form>
             </div>
         </div>
