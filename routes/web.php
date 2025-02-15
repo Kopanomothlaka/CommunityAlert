@@ -13,10 +13,16 @@ Route::prefix('admin')->group(function () {
     Route::post('/login', [AdminController::class, 'login'])->name('admin.login.submit');
     Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
 
+    //call the welcome page
+    Route::get('/pages/welcome', function () {
+        return view('admin.pages.welcome');
+    })->name('admin.pages.welcome');
+
+
     // Protected routes
     Route::middleware('auth:admin')->group(function () {
-        Route::get('/dashboard', function () {
-            return view('admin.dashboard');
+        Route::get('/dashboard/pages/welcome', function () {
+            return view('admin.pages.welcome');
         })->name('admin.dashboard');
     });
 });
