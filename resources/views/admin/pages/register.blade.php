@@ -3,21 +3,20 @@
 @section('main-content')
 
     <div class="pagetitle d-flex justify-content-between align-items-center">
-        <h1>User List</h1>
-        <a href="#addUser" class="btn btn-primary">
+        <h1>Admin List</h1>
+        <!-- Button to trigger modal -->
+        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
             <i class="bi bi-plus-lg"></i> Add
         </a>
     </div>
     <hr> <!-- Horizontal Line -->
-
-
 
     <section class="section">
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Registered Users</h5>
+                        <h5 class="card-title">Registered Admin</h5>
 
                         <!-- Static Data Table -->
                         <div class="table-responsive">
@@ -67,7 +66,6 @@
                                     <td>2006-11-09</td>
                                     <td><span class="badge bg-danger">Suspended</span></td>
                                 </tr>
-                                <!-- Add more static rows as needed -->
                                 </tbody>
                             </table>
                         </div>
@@ -92,5 +90,46 @@
             </div>
         </div>
     </section>
+
+    <!-- Add User Modal -->
+    <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addUserModalLabel">Add New Admin</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="#" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Status</label>
+                            <select class="form-select" id="status" name="status" required>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Suspended">Suspended</option>
+                            </select>
+                        </div>
+                        <div class="text-center"> <!-- Centering the button -->
+                            <button type="submit" class="btn btn-primary w-50">Save Admin</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection

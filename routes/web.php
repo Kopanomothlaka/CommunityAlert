@@ -36,6 +36,12 @@ Route::prefix('admin')->group(function () {
         return view('admin.pages.profile');
     })->name('admin.pages.profile');
 
+    //call the admin register
+    Route::get('/pages/register', function () {
+        return view('admin.pages.register');
+    })->name('admin.pages.register');
+
+
 
 
     // Protected routes
