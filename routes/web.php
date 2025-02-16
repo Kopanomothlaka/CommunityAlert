@@ -11,6 +11,8 @@ Route::get('/', function () {
 Route::prefix('admin')->group(function () {
     Route::get('/login', [AdminController::class, 'showLoginForm'])->name('admin.login');
     Route::post('/login', [AdminController::class, 'login'])->name('admin.login.submit');
+
+    Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout');
     Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
 
     //call the welcome page
