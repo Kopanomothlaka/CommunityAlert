@@ -10,7 +10,7 @@
         </li><!-- End Dashboard Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#alerts-nav" data-bs-toggle="collapse" href="#">
+            <a class="nav-link collapsed"  href="{{route('admin.pages.alerts')}}">
                 <i class="bi bi-bell"></i><span>Alerts</span>
             </a>
         </li>

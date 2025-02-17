@@ -41,6 +41,11 @@ Route::prefix('admin')->group(function () {
         return view('admin.pages.register');
     })->name('admin.pages.register');
 
+    //call the alerts page
+    Route::get('/pages/alerts', function () {
+        return view('admin.pages.alerts');
+    })->name('admin.pages.alerts');
+
 
 
 
