@@ -2,6 +2,9 @@
 
 @section('main-content')
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
     <div class="pagetitle d-flex justify-content-between align-items-center">
         <h1>Admin List</h1>
         <!-- Button to trigger modal -->
@@ -18,6 +21,9 @@
                     <div class="card-body">
                         <h5 class="card-title">Registered Admin</h5>
 
+                        <!-- Add Bootstrap Icons CSS -->
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
                         <!-- Static Data Table -->
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
@@ -28,6 +34,7 @@
                                     <th>Location</th>
                                     <th>Registration Date</th>
                                     <th>Status</th>
+                                    <th>Actions</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -37,40 +44,21 @@
                                     <td>Curicó, Chile</td>
                                     <td>2005-02-11</td>
                                     <td><span class="badge bg-success">Active</span></td>
+                                    <td>
+                                        <a href="#" class="btn btn-link p-0 me-2" aria-label="Edit" data-bs-toggle="modal" data-bs-target="#editModal" onclick="populateEditForm('Unity Pugh', '#9958', 'Curicó, Chile', '2005-02-11', 'Active')">
+                                            <i class="bi bi-pencil-square text-primary"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-link p-0" aria-label="Delete" data-bs-toggle="modal" data-bs-target="#deleteModal" onclick="setDeleteUser('Unity Pugh')">
+                                            <i class="bi bi-trash-fill text-danger"></i>
+                                        </a>
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <td>Theodore Duran</td>
-                                    <td>#8971</td>
-                                    <td>Dhanbad, India</td>
-                                    <td>1999-04-07</td>
-                                    <td><span class="badge bg-secondary">Inactive</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Kylie Bishop</td>
-                                    <td>#3147</td>
-                                    <td>Norman, USA</td>
-                                    <td>2005-09-08</td>
-                                    <td><span class="badge bg-success">Active</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Willow Gilliam</td>
-                                    <td>#3497</td>
-                                    <td>Amqui, Canada</td>
-                                    <td>2009-11-29</td>
-                                    <td><span class="badge bg-warning">Pending</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Blossom Dickerson</td>
-                                    <td>#5018</td>
-                                    <td>Kempten, Germany</td>
-                                    <td>2006-11-09</td>
-                                    <td><span class="badge bg-danger">Suspended</span></td>
-                                </tr>
+                                <!-- Repeat for other rows -->
                                 </tbody>
                             </table>
                         </div>
 
-                        <!-- Static Pagination -->
+                        <!-- Pagination -->
                         <nav aria-label="Page navigation">
                             <ul class="pagination justify-content-center">
                                 <li class="page-item disabled">
@@ -84,12 +72,86 @@
                                 </li>
                             </ul>
                         </nav>
-
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Admin</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm">
+                        <div class="mb-3">
+                            <label class="form-label">Name</label>
+                            <input type="text" class="form-control" id="editName">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Residence</label>
+                            <input type="text" class="form-control" id="editResidence">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Location</label>
+                            <input type="text" class="form-control" id="editLocation">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Registration Date</label>
+                            <input type="date" class="form-control" id="editDate">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Status</label>
+                            <select class="form-control" id="editStatus">
+                                <option>Active</option>
+                                <option>Inactive</option>
+                                <option>Pending</option>
+                                <option>Suspended</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete <strong id="deleteUserName"></strong>?</p>
+                    <button type="button" class="btn btn-danger w-100">Yes, Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Functions for edit modal which prefill the data in the edit form-->
+    <script>
+        function populateEditForm(name, residence, location, date, status) {
+            document.getElementById('editName').value = name;
+            document.getElementById('editResidence').value = residence;
+            document.getElementById('editLocation').value = location;
+            document.getElementById('editDate').value = date;
+            document.getElementById('editStatus').value = status;
+        }
+
+        function setDeleteUser(name) {
+            document.getElementById('deleteUserName').innerText = name;
+        }
+    </script>
+
+    <!-- Bootstrap JS -->
 
     <!-- Add User Modal -->
     <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">

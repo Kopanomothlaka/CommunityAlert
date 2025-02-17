@@ -2,7 +2,7 @@
 <html lang="en">
 
 @include('admin.head')
-<body>
+<body class="d-flex flex-column min-vh-100">
 
 <!-- ======= Header ======= -->
 @include('admin.header')
