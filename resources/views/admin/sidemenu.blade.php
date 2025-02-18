@@ -25,7 +25,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#reports-nav" data-bs-toggle="collapse" href="#">
+            <a class="nav-link collapsed"  href="{{route('admin.pages.reports')}}">
                 <i class="bi bi-file-earmark-text"></i><span>Reports</span>
             </a>
         </li>
