@@ -15,9 +15,9 @@
 
 
     <section class="section">
-        <div class="row">
-            <!-- Meeting Cards -->
-            <div class="col-md-6 col-lg-4 mb-4">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <!-- Meeting Card 1 -->
+            <div class="col">
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-3">
@@ -43,11 +43,9 @@
                             <strong>Agenda:</strong> Discuss water conservation measures
                         </div>
                         <div class="d-flex justify-content-end gap-2">
-                            <!-- Edit Icon (Blue) -->
                             <a href="#" class="btn btn-link p-0" data-bs-toggle="modal" data-bs-target="#editMeetingModal" onclick="populateEditForm('Water Management Meeting', '2023-11-15T14:00', '2023-11-15T16:00', 'Community Hall', 'All Residents', 'Discuss water conservation measures', 'active')">
                                 <i class="bi bi-pencil-square text-primary"></i>
                             </a>
-                            <!-- Delete Icon (Blue) -->
                             <a href="#" class="btn btn-link p-0" data-bs-toggle="modal" data-bs-target="#deleteMeetingModal" onclick="setDeleteMeeting('Water Management Meeting')">
                                 <i class="bi bi-trash text-primary"></i>
                             </a>
@@ -56,9 +54,48 @@
                 </div>
             </div>
 
-            <!-- Add more meeting cards as needed -->
+            <!-- Meeting Card 2 -->
+            <div class="col">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="card-title mb-0">Town Hall Discussion</h5>
+                            <span class="badge bg-warning">Upcoming</span>
+                        </div>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <i class="bi bi-calendar-event me-2 text-primary"></i>
+                                <strong>Date:</strong> 2023-12-10 10:00 - 12:00
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-geo-alt me-2 text-primary"></i>
+                                <strong>Location:</strong> Town Hall
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-people me-2 text-primary"></i>
+                                <strong>Attendees:</strong> Local Officials & Public
+                            </li>
+                        </ul>
+                        <div class="mb-3">
+                            <i class="bi bi-journal-text me-2 text-primary"></i>
+                            <strong>Agenda:</strong> Discuss community improvements
+                        </div>
+                        <div class="d-flex justify-content-end gap-2">
+                            <a href="#" class="btn btn-link p-0" data-bs-toggle="modal" data-bs-target="#editMeetingModal" onclick="populateEditForm('Town Hall Discussion', '2023-12-10T10:00', '2023-12-10T12:00', 'Town Hall', 'Local Officials & Public', 'Discuss community improvements', 'upcoming')">
+                                <i class="bi bi-pencil-square text-primary"></i>
+                            </a>
+                            <a href="#" class="btn btn-link p-0" data-bs-toggle="modal" data-bs-target="#deleteMeetingModal" onclick="setDeleteMeeting('Town Hall Discussion')">
+                                <i class="bi bi-trash text-primary"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add more cards here -->
         </div>
     </section>
+
 
 
 
