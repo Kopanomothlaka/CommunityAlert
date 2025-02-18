@@ -8,6 +8,11 @@
                 <span>Dashboard</span>
             </a>
         </li><!-- End Dashboard Nav -->
+        <li class="nav-item">
+            <a class="nav-link collapsed"  href="{{route('admin.pages.meeting')}}">
+                <i class="bi bi-people"></i><span>Meeting</span>
+            </a>
+        </li>
 
         <li class="nav-item">
             <a class="nav-link collapsed"  href="{{route('admin.pages.alerts')}}">

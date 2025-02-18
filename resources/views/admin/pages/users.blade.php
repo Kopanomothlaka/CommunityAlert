@@ -4,9 +4,7 @@
 
     <div class="pagetitle d-flex justify-content-between align-items-center">
         <h1>User List</h1>
-        <a href="#addUser" class="btn btn-primary">
-            <i class="bi bi-plus-lg"></i> Add
-        </a>
+
     </div>
     <hr> <!-- Horizontal Line -->
 
@@ -29,6 +27,8 @@
                                     <th>Location</th>
                                     <th>Registration Date</th>
                                     <th>Status</th>
+                                    <th>Action</th>
+
                                 </tr>
                                 </thead>
                                 <tbody>

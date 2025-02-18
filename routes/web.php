@@ -46,6 +46,12 @@ Route::prefix('admin')->group(function () {
         return view('admin.pages.alerts');
     })->name('admin.pages.alerts');
 
+    //call the meeting page
+    Route::get('/pages/meeting', function () {
+        return view('admin.pages.meeting');
+    })->name('admin.pages.meeting');
+
+
 
 
 
