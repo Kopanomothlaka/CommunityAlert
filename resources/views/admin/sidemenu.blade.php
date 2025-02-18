@@ -20,7 +20,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#jobs-nav" data-bs-toggle="collapse" href="#">
+            <a class="nav-link collapsed"  href="{{route('admin.pages.jobs')}}">
                 <i class="bi bi-briefcase"></i><span>Jobs</span>
             </a>
         </li>

@@ -51,6 +51,12 @@ Route::prefix('admin')->group(function () {
         return view('admin.pages.meeting');
     })->name('admin.pages.meeting');
 
+    //call the jobs page
+    Route::get('/pages/jobs', function () {
+        return view('admin.pages.jobs');
+    })->name('admin.pages.jobs');
+
+
 
 
 
