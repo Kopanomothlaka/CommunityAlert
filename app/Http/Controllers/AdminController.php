@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Admin; // Ensure Admin model is imported
+use App\Models\Admin;
+use Illuminate\Support\Facades\Log;
+
+// Ensure Admin model is imported
 
 class AdminController extends Controller
 {
@@ -15,23 +18,26 @@ class AdminController extends Controller
         return view('admin.login'); // Ensure this file exists
     }
 
+
+
     // Handle admin login
     public function login(Request $request)
     {
         $credentials = $request->validate([
             'email' => 'required|email',
-            'password' => 'required|string',
+            'password' => 'required',
         ]);
 
         if (Auth::guard('admin')->attempt($credentials, $request->remember)) {
             $request->session()->regenerate();
-            return redirect()->intended('/admin/pages/welcome');
+            return redirect()->intended(route('admin.dashboard'));
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->withInput($request->only('email'));
+            'email' => 'Invalid credentials.',
+        ])->onlyInput('email');
     }
+
 
     // Handle admin logout
     public function logout(Request $request)

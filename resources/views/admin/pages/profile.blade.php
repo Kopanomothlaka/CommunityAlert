@@ -159,37 +159,42 @@
                             </div>
 
                             <!-- Change Password Tab -->
+                            <!-- Change Password Tab -->
                             <div class="tab-pane fade pt-3" id="profile-change-password">
-                                <form method="POST" action="{{ route('admin.profile.update-password') }}">
+                                <form method="POST" action="{{ route('admin.profile.update-password') }}" novalidate>
                                     @csrf
 
+                                    <!-- Current Password -->
                                     <div class="row mb-3">
                                         <label for="current_password" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="current_password" type="password" class="form-control" id="current_password">
+                                            <input name="current_password" type="password" class="form-control @error('current_password') is-invalid @enderror" id="current_password" required>
                                             @error('current_password')
-                                            <div class="text-danger">{{ $message }}</div>
+                                            <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
 
+                                    <!-- New Password -->
                                     <div class="row mb-3">
                                         <label for="new_password" class="col-md-4 col-lg-3 col-form-label">New Password</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="new_password" type="password" class="form-control" id="new_password">
+                                            <input name="new_password" type="password" class="form-control @error('new_password') is-invalid @enderror" id="new_password" required minlength="8">
                                             @error('new_password')
-                                            <div class="text-danger">{{ $message }}</div>
+                                            <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
 
+                                    <!-- Confirm New Password -->
                                     <div class="row mb-3">
                                         <label for="new_password_confirmation" class="col-md-4 col-lg-3 col-form-label">Confirm New Password</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="new_password_confirmation" type="password" class="form-control" id="new_password_confirmation">
+                                            <input name="new_password_confirmation" type="password" class="form-control" id="new_password_confirmation" required>
                                         </div>
                                     </div>
 
+                                    <!-- Submit Button -->
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-primary">Change Password</button>
                                     </div>
@@ -200,5 +205,21 @@
                 </div>
             </div>
         </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const forms = document.querySelectorAll("form");
+
+                forms.forEach((form) => {
+                    form.addEventListener("submit", function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add("was-validated");
+                    });
+                });
+            });
+
+        </script>
     </section>
 @endsection

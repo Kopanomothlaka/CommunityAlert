@@ -10,26 +10,14 @@ class Admin extends Authenticatable
 {
     use Notifiable;
 
-    protected $guard = 'admin';
-
     protected $fillable = [
         'name',
         'email',
         'password',
-        'about',
-        'job',
-        'country',
-        'address',
-        'phone'
     ];
 
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
-
-    // Add this mutator to ensure password is hashed when set
-    public function setPasswordAttribute($value)
-    {
-        $this->attributes['password'] = bcrypt($value);
-    }
 }
