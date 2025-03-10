@@ -50,14 +50,7 @@ class AdminController extends Controller
 
 
     //show profile page
-    public function adminProfile()
-    {
-        // Get the authenticated admin
-        $admin = Auth::guard('admin')->user();
 
-        // Pass it to the view
-        return view('admin.pages.profile', compact('admin'));
-    }
 
 
     // Update admin profile
