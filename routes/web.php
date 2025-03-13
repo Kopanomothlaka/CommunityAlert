@@ -21,10 +21,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
         return view('admin.pages.welcome');
     })->name('admin.dashboard');
 
-    // Profile routes
-    Route::get('/profile', [AdminController::class, 'adminProfile'])->name('admin.pages.profile');
-    Route::post('/profile/update', [AdminController::class, 'updateProfile'])->name('admin.profile.update');
-    Route::post('/profile/update-password', [AdminController::class, 'updatePassword'])->name('admin.profile.update-password');
+
 
     // Admin pages
     Route::prefix('/pages')->group(function () {
@@ -55,6 +52,13 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
         Route::get('/reports', function () {
             return view('admin.pages.reports');
         })->name('admin.pages.reports');
+
+
+        // Profile routes
+        Route::get('/profile', [AdminController::class, 'adminProfile'])->name('admin.pages.profile');
+        Route::post('/profile/update', [AdminController::class, 'updateProfile'])->name('admin.profile.update');
+        Route::post('/profile/update-password', [AdminController::class, 'updatePassword'])->name('admin.profile.update-password');
+
     });
 
     // Registration route (if needed)

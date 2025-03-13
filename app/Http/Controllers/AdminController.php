@@ -45,13 +45,19 @@ class AdminController extends Controller
         Auth::guard('admin')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/admin/login');
+        return redirect('/login');
     }
 
 
-    //show profile page
+    // Show profile page
+    public function adminProfile()
+    {
+        // Get the authenticated admin
+        $admin = Auth::guard('admin')->user();
 
-
+        // Pass the admin data to the view
+        return view('admin.pages.profile', compact('admin'));
+    }
 
     // Update admin profile
     public function updateProfile(Request $request)

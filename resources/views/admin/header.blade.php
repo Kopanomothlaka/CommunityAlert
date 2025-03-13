@@ -196,10 +196,14 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{route('admin.logout')}}">
+                        <a class="dropdown-item d-flex align-items-center" href="#">
                             <i class="bi bi-box-arrow-right"></i>
-                            <span>Sign Out</span>
+                            <form action="{{ route('admin.logout') }}" method="POST" class="d-inline">
+                                @csrf
+                                <button type="submit" class="btn btn-link p-0 text-decoration-none">Logout</button>
+                            </form>
                         </a>
+
                     </li>
 
                 </ul><!-- End Profile Dropdown Items -->
