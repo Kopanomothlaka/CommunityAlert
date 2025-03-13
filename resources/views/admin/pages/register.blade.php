@@ -20,40 +20,123 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Registered Admin</h5>
+                        @if(session('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ session('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
 
                         <!-- Add Bootstrap Icons CSS -->
                         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-                        <!-- Static Data Table -->
+                        <!-- Dynamic Data Table -->
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
                                 <thead class="table-light">
                                 <tr>
                                     <th>Name</th>
-                                    <th>Residence</th>
-                                    <th>Location</th>
-                                    <th>Registration Date</th>
+                                    <th>Email</th>
+                                    <th>Country</th>
+                                    <th>Address</th>
+                                    <th>Phone</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>Unity Pugh</td>
-                                    <td>#9958</td>
-                                    <td>Curicó, Chile</td>
-                                    <td>2005-02-11</td>
-                                    <td><span class="badge bg-success">Active</span></td>
-                                    <td>
-                                        <a href="#" class="btn btn-link p-0 me-2" aria-label="Edit" data-bs-toggle="modal" data-bs-target="#editModal" onclick="populateEditForm('Unity Pugh', '#9958', 'Curicó, Chile', '2005-02-11', 'Active')">
-                                            <i class="bi bi-pencil-square text-primary"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-link p-0" aria-label="Delete" data-bs-toggle="modal" data-bs-target="#deleteModal" onclick="setDeleteUser('Unity Pugh')">
-                                            <i class="bi bi-trash-fill text-danger"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <!-- Repeat for other rows -->
+                                @foreach($admins as $admin)
+                                    <tr>
+                                        <td>{{ $admin->name }}</td>
+                                        <td>{{ $admin->email }}</td>
+                                        <td>{{ $admin->country ?? 'N/A' }}</td>
+                                        <td>{{ $admin->address ?? 'N/A' }}</td>
+                                        <td>{{ $admin->phone ?? 'N/A' }}</td>
+                                        <td>
+                                            <span class="badge bg-{{ $admin->status === 'Active' ? 'success' : ($admin->status === 'Inactive' ? 'danger' : 'warning') }}">
+                                                {{ $admin->status }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a href="#" class="btn btn-link p-0 me-2" aria-label="Edit" data-bs-toggle="modal" data-bs-target="#editModal{{ $admin->id }}">
+                                                <i class="bi bi-pencil-square text-primary"></i>
+                                            </a>
+                                            <a href="#" class="btn btn-link p-0" aria-label="Delete" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $admin->id }}">
+                                                <i class="bi bi-trash-fill text-danger"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Edit Modal for Each Admin -->
+                                    <div class="modal fade" id="editModal{{ $admin->id }}" tabindex="-1" aria-labelledby="editModalLabel{{ $admin->id }}" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="editModalLabel{{ $admin->id }}">Edit Admin</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="{{ route('admin.admins.update', $admin->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <div class="mb-3">
+                                                            <label for="name" class="form-label">Full Name</label>
+                                                            <input type="text" class="form-control" id="name" name="name" value="{{ $admin->name }}" required>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="email" class="form-label">Email Address</label>
+                                                            <input type="email" class="form-control" id="email" name="email" value="{{ $admin->email }}" required>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="country" class="form-label">Country</label>
+                                                            <input type="text" class="form-control" id="country" name="country" value="{{ $admin->country }}">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="address" class="form-label">Address</label>
+                                                            <input type="text" class="form-control" id="address" name="address" value="{{ $admin->address }}">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="phone" class="form-label">Phone</label>
+                                                            <input type="text" class="form-control" id="phone" name="phone" value="{{ $admin->phone }}">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="status" class="form-label">Status</label>
+                                                            <select class="form-select" id="status" name="status" required>
+                                                                <option value="Active" {{ $admin->status === 'Active' ? 'selected' : '' }}>Active</option>
+                                                                <option value="Inactive" {{ $admin->status === 'Inactive' ? 'selected' : '' }}>Inactive</option>
+                                                                <option value="Pending" {{ $admin->status === 'Pending' ? 'selected' : '' }}>Pending</option>
+                                                                <option value="Suspended" {{ $admin->status === 'Suspended' ? 'selected' : '' }}>Suspended</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="text-center">
+                                                            <button type="submit" class="btn btn-primary w-50">Save Changes</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Delete Confirmation Modal for Each Admin -->
+                                    <div class="modal fade" id="deleteModal{{ $admin->id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ $admin->id }}" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="deleteModalLabel{{ $admin->id }}">Confirm Deletion</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Are you sure you want to delete <strong>{{ $admin->name }}</strong>?</p>
+                                                    <form action="{{ route('admin.admins.destroy', $admin->id) }}" method="POST" class="d-inline">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger w-100">Yes, Delete</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -78,7 +161,7 @@
         </div>
     </section>
 
-    <!-- Edit Modal -->
+
     <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -130,7 +213,6 @@
             </div>
         </div>
     </div>
-    <!-- Delete Confirmation Modal -->
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -144,7 +226,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- JavaScript Functions for edit modal which prefill the data in the edit form-->
     <script>

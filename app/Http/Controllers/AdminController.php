@@ -95,6 +95,40 @@ class AdminController extends Controller
     }
 
 
+// Display the list of admins
+    public function index()
+    {
+        $admins = Admin::all(); // Fetch all admins
+        return view('admin.pages.register', compact('admins'));
+    }
+  // Edit an admin
+    public function edit(Admin $admin)
+    {
+        return view('admin.pages.edit-admin', compact('admin'));
+    }
+    // Update an admin
+    public function update(Request $request, Admin $admin)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:admins,email,' . $admin->id,
+            'country' => 'nullable|string|max:255',
+            'address' => 'nullable|string|max:255',
+            'phone' => 'nullable|string|max:20',
+            'status' => 'required|string|in:Active,Inactive,Pending,Suspended',
+        ]);
+
+        $admin->update($validated);
+
+        return redirect()->route('admin.pages.register')->with('success', 'Admin updated successfully!');
+    }
+
+    // Delete an admin
+    public function destroy(Admin $admin)
+    {
+        $admin->delete();
+        return redirect()->route('admin.pages.register')->with('success', 'Admin deleted successfully!');
+    }
 
     public function store(Request $request)
     {

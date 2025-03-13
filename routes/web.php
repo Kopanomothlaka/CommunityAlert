@@ -17,6 +17,8 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
     Route::post('/admins', [AdminController::class, 'store'])->name('admin.admins.store');
 
+
+
     // Dashboard
     Route::get('/dashboard', function () {
         return view('admin.pages.welcome');
@@ -60,10 +62,15 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
         Route::post('/profile/update', [AdminController::class, 'updateProfile'])->name('admin.profile.update');
         Route::post('/profile/update-password', [AdminController::class, 'updatePassword'])->name('admin.profile.update-password');
 
+        // Admin management routes
+        Route::get('/register', [AdminController::class, 'index'])->name('admin.admins.index');
+        Route::post('/register', [AdminController::class, 'store'])->name('admin.admins.store');
+        Route::put('/admins/{admin}', [AdminController::class, 'update'])->name('admin.admins.update');
+        Route::delete('/admins/{admin}', [AdminController::class, 'destroy'])->name('admin.admins.destroy');
+
+        Route::get('/register', [AdminController::class, 'index'])->name('admin.pages.register');
+
     });
 
-    // Registration route (if needed)
-    Route::get('/register', function () {
-        return view('admin.pages.register');
-    })->name('admin.pages.register');
+
 });
