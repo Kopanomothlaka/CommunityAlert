@@ -79,47 +79,57 @@
     </section>
 
     <!-- Edit Modal -->
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Edit Admin</h5>
+                    <h5 class="modal-title" id="addUserModalLabel">Add New Admin</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="editForm">
+                    <form action="{{ route('admin.admins.store') }}" method="POST">
+                        @csrf
                         <div class="mb-3">
-                            <label class="form-label">Name</label>
-                            <input type="text" class="form-control" id="editName">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Residence</label>
-                            <input type="text" class="form-control" id="editResidence">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Location</label>
-                            <input type="text" class="form-control" id="editLocation">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Registration Date</label>
-                            <input type="date" class="form-control" id="editDate">
+                            <label for="country" class="form-label">Country</label>
+                            <input type="text" class="form-control" id="country" name="country">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Status</label>
-                            <select class="form-control" id="editStatus">
-                                <option>Active</option>
-                                <option>Inactive</option>
-                                <option>Pending</option>
-                                <option>Suspended</option>
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="address" name="address">
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone</label>
+                            <input type="text" class="form-control" id="phone" name="phone">
+                        </div>
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Status</label>
+                            <select class="form-select" id="status" name="status" required>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Suspended">Suspended</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary w-50">Save Admin</button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
     <!-- Delete Confirmation Modal -->
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">

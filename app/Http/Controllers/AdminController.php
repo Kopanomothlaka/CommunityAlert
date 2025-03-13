@@ -93,4 +93,31 @@ class AdminController extends Controller
 
         return redirect()->route('admin.pages.profile')->with('success', 'Password updated successfully');
     }
+
+
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:admins,email',
+            'password' => 'required|string|min:8',
+            'country' => 'nullable|string|max:255',
+            'address' => 'nullable|string|max:255',
+            'phone' => 'nullable|string|max:20',
+            'status' => 'required|string|in:Active,Inactive,Pending,Suspended',
+        ]);
+
+        Admin::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+            'country' => $validated['country'],
+            'address' => $validated['address'],
+            'phone' => $validated['phone'],
+            'status' => $validated['status'],
+        ]);
+
+        return redirect()->route('admin.pages.register')->with('success', 'Admin created successfully!');
+    }
 }

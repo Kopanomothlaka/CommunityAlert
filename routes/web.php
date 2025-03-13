@@ -15,6 +15,7 @@ Route::post('/login', [AdminController::class, 'login'])->name('admin.login.subm
 Route::prefix('admin')->middleware('auth:admin')->group(function () {
     // Logout (POST only for security)
     Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
+    Route::post('/admins', [AdminController::class, 'store'])->name('admin.admins.store');
 
     // Dashboard
     Route::get('/dashboard', function () {
