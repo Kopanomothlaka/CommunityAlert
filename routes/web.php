@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 // Public routes
@@ -36,9 +37,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
             return view('admin.pages.chats');
         })->name('admin.pages.chats');
 
-        Route::get('/users', function () {
-            return view('admin.pages.users');
-        })->name('admin.pages.users');
+
 
         Route::get('/alerts', function () {
             return view('admin.pages.alerts');
@@ -69,6 +68,13 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
         Route::delete('/admins/{admin}', [AdminController::class, 'destroy'])->name('admin.admins.destroy');
 
         Route::get('/register', [AdminController::class, 'index'])->name('admin.pages.register');
+
+        // User management routes
+
+        Route::get('/users', [UserController::class, 'index'])->name('admin.pages.users');
+        Route::post('/users', [UserController::class, 'store'])->name('admin.users.store');
+        Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
+
 
     });
 
