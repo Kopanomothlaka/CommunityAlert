@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,9 +44,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
             return view('admin.pages.alerts');
         })->name('admin.pages.alerts');
 
-        Route::get('/meeting', function () {
-            return view('admin.pages.meeting');
-        })->name('admin.pages.meeting');
+
 
         Route::get('/jobs', function () {
             return view('admin.pages.jobs');
@@ -75,8 +74,15 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
         Route::post('/users', [UserController::class, 'store'])->name('admin.users.store');
         Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
 
-
+        //Admin create meeting routes
+        // Meeting management routes
+        Route::get('/meeting', [MeetingController::class, 'index'])->name('admin.pages.meeting');
+        Route::post('/meeting', [MeetingController::class, 'store'])->name('admin.meetings.store');
+        Route::put('/meeting/{meeting}', [MeetingController::class, 'update'])->name('admin.meetings.update');
+        Route::delete('/meeting/{meeting}', [MeetingController::class, 'destroy'])->name('admin.meetings.destroy');
     });
+
+
 
 
 });
