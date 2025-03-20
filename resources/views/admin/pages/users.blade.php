@@ -174,10 +174,9 @@
     </div>
 
     <script>
-        // Delete User Confirmation
         function setDeleteUser(userName, userId) {
             document.getElementById('deleteUserName').textContent = userName;
-            document.getElementById('deleteUserForm').action = `/admin/users/${userId}`;
+            document.getElementById('deleteUserForm').action = "{{ route('admin.users.destroy', '') }}/" + userId;
         }
     </script>
 @endsection

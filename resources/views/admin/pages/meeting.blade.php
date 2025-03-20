@@ -161,20 +161,7 @@
                                 </div>
                             </div>
 
-                            <!-- Attendees -->
-                            <div class="col-md-6">
-                                <div class="input-group">
-                                    <span class="input-group-text">
-                                        <i class="bi bi-people text-primary"></i>
-                                    </span>
-                                    <select class="form-select" multiple>
-                                        <option value="parents">Parents</option>
-                                        <option value="men">Men</option>
-                                        <option value="women">Women</option>
-                                        <option value="all">All Residents</option>
-                                    </select>
-                                </div>
-                            </div>
+                             
 
                             <!-- Status -->
                             <div class="col-md-6">
