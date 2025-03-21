@@ -290,7 +290,7 @@
     <script>
         // Function to populate the edit form
         function populateEditForm(id, title, startTime, endTime, location, attendees, agenda, description, status) {
-            document.getElementById('editMeetingForm').action = `/admin/meetings/${id}`;
+            document.getElementById('editMeetingForm').action = "{{ route('admin.meetings.update', '') }}/" + id;
             document.getElementById('editMeetingTitle').value = title;
             document.getElementById('editStartTime').value = startTime;
             document.getElementById('editEndTime').value = endTime;
@@ -310,7 +310,7 @@
         // Function to set the meeting title for deletion
         function setDeleteMeeting(title, id) {
             document.getElementById('deleteMeetingTitle').textContent = title;
-            document.getElementById('deleteMeetingForm').action = `/admin/meetings/${id}`;
+            document.getElementById('deleteMeetingForm').action = "{{ route('admin.meetings.destroy', '') }}/" + id;
         }
     </script>
 @endsection
