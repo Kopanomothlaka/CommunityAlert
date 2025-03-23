@@ -9,9 +9,11 @@ class Alert extends Model
 {
     use HasFactory;
 
-    // Specify fillable attributes
     protected $fillable = [
-        'title',
-        'message',
+        'alert_name',
+        'location',
+        'start_datetime',
+        'end_datetime',
+        'status',
     ];
 }

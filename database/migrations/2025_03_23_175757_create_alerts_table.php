@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('alerts', function (Blueprint $table) {
             $table->id();
-            $table->string('title'); // e.g., "Water Alert"
-            $table->text('message'); // e.g., "Water will be available from 10 AM to 12 PM."
+            $table->string('alert_name');
+            $table->string('location');
+            $table->dateTime('start_datetime');
+            $table->dateTime('end_datetime');
+            $table->string('status');
             $table->timestamps();
         });
     }

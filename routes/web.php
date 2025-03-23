@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AlertController;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -40,9 +41,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
 
 
 
-        Route::get('/alerts', function () {
-            return view('admin.pages.alerts');
-        })->name('admin.pages.alerts');
+;
 
 
 
@@ -80,6 +79,12 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
         Route::post('/meeting', [MeetingController::class, 'store'])->name('admin.meetings.store');
         Route::put('/meeting/{meeting}', [MeetingController::class, 'update'])->name('admin.meetings.update');
         Route::delete('/meeting/{meeting}', [MeetingController::class, 'destroy'])->name('admin.meetings.destroy');
+
+        //alerts
+        Route::get('/alerts', [AlertController::class, 'index'])->name('admin.pages.alerts');
+        Route::post('/alerts/store', [AlertController::class, 'store'])->name('admin.alerts.store');
+        Route::put('/alerts/update/{id}', [AlertController::class, 'update'])->name('admin.alerts.update');
+        Route::delete('/alerts/delete/{id}', [AlertController::class, 'destroy'])->name('admin.alerts.destroy');
     });
 
 

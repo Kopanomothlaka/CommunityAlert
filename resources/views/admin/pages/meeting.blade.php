@@ -41,10 +41,7 @@
                                     <i class="bi bi-geo-alt me-2 text-primary"></i>
                                     <strong>Location:</strong> {{ $meeting->location }}
                                 </li>
-                                <li class="mb-2">
-                                    <i class="bi bi-people me-2 text-primary"></i>
-                                    <strong>Attendees:</strong> {{ implode(', ', $meeting->attendees ?? []) }}
-                                </li>
+                              
                             </ul>
                             <div class="mb-3">
                                 <i class="bi bi-journal-text me-2 text-primary"></i>

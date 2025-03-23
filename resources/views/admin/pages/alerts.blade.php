@@ -20,7 +20,14 @@
                     <div class="card-body">
                         <h5 class="card-title">Important Alerts</h5>
 
-                        <!-- Static Data Table -->
+                        <!-- Display success message -->
+                        @if(session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+                        <!-- Dynamic Data Table -->
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
                                 <thead class="table-light">
@@ -34,41 +41,29 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>Water Shortage</td>
-                                    <td>Downtown Area</td>
-                                    <td>2023-10-01 10:00 AM</td>
-                                    <td>2023-10-01 12:00 PM</td>
-                                    <td><span class="badge bg-success">Active</span></td>
-                                    <td>
-                                        <!-- Edit Icon -->
-                                        <a href="#" class="btn btn-link p-0 me-2" aria-label="Edit" data-bs-toggle="modal" data-bs-target="#editModal" onclick="populateEditForm('Water Shortage', 'Downtown Area', '2023-10-01T10:00', '2023-10-01T12:00', 'active')">
-                                            <i class="bi bi-pencil-square text-primary"></i>
-                                        </a>
-                                        <!-- Delete Icon -->
-                                        <a href="#" class="btn btn-link p-0" aria-label="Delete" data-bs-toggle="modal" data-bs-target="#deleteModal" onclick="setDeleteAlert('Water Shortage')">
-                                            <i class="bi bi-trash-fill text-danger"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Power Outage</td>
-                                    <td>Suburban Area</td>
-                                    <td>2023-10-02 02:00 PM</td>
-                                    <td>2023-10-02 04:00 PM</td>
-                                    <td><span class="badge bg-secondary">Inactive</span></td>
-                                    <td>
-                                        <!-- Edit Icon -->
-                                        <a href="#" class="btn btn-link p-0 me-2" aria-label="Edit" data-bs-toggle="modal" data-bs-target="#editModal" onclick="populateEditForm('Power Outage', 'Suburban Area', '2023-10-02T14:00', '2023-10-02T16:00', 'inactive')">
-                                            <i class="bi bi-pencil-square text-primary"></i>
-                                        </a>
-                                        <!-- Delete Icon -->
-                                        <a href="#" class="btn btn-link p-0" aria-label="Delete" data-bs-toggle="modal" data-bs-target="#deleteModal" onclick="setDeleteAlert('Power Outage')">
-                                            <i class="bi bi-trash-fill text-danger"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <!-- Add more static rows as needed -->
+                                @foreach($alerts as $alert)
+                                    <tr>
+                                        <td>{{ $alert->alert_name }}</td>
+                                        <td>{{ $alert->location }}</td>
+                                        <td>{{ $alert->start_datetime }}</td>
+                                        <td>{{ $alert->end_datetime }}</td>
+                                        <td>
+                                            <span class="badge bg-{{ $alert->status === 'active' ? 'success' : 'secondary' }}">
+                                                {{ ucfirst($alert->status) }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <!-- Edit Icon -->
+                                            <a href="#" class="btn btn-link p-0 me-2" aria-label="Edit" data-bs-toggle="modal" data-bs-target="#editModal" onclick="populateEditForm('{{ $alert->id }}', '{{ $alert->alert_name }}', '{{ $alert->location }}', '{{ $alert->start_datetime }}', '{{ $alert->end_datetime }}', '{{ $alert->status }}')">
+                                                <i class="bi bi-pencil-square text-primary"></i>
+                                            </a>
+                                            <!-- Delete Icon -->
+                                            <a href="#" class="btn btn-link p-0" aria-label="Delete" data-bs-toggle="modal" data-bs-target="#deleteModal" onclick="setDeleteAlert('{{ $alert->id }}', '{{ $alert->alert_name }}')">
+                                                <i class="bi bi-trash-fill text-danger"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -103,37 +98,38 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="{{ route('admin.alerts.store') }}" method="POST">
+                        @csrf
                         <div class="mb-3">
                             <label for="alertName" class="form-label">Alert Name</label>
-                            <input type="text" class="form-control" id="alertName" placeholder="e.g., Water Shortage, Power Outage">
+                            <input type="text" class="form-control" id="alertName" name="alert_name" placeholder="e.g., Water Shortage, Power Outage" required>
                         </div>
                         <div class="mb-3">
                             <label for="location" class="form-label">Location</label>
-                            <input type="text" class="form-control" id="location" placeholder="e.g., Downtown Area">
+                            <input type="text" class="form-control" id="location" name="location" placeholder="e.g., Downtown Area" required>
                         </div>
                         <div class="mb-3">
                             <label for="startDateTime" class="form-label">Start Date & Time</label>
-                            <input type="datetime-local" class="form-control" id="startDateTime">
+                            <input type="datetime-local" class="form-control" id="startDateTime" name="start_datetime" required>
                         </div>
                         <div class="mb-3">
                             <label for="endDateTime" class="form-label">End Date & Time</label>
-                            <input type="datetime-local" class="form-control" id="endDateTime">
+                            <input type="datetime-local" class="form-control" id="endDateTime" name="end_datetime" required>
                         </div>
                         <div class="mb-3">
                             <label for="status" class="form-label">Status</label>
-                            <select class="form-select" id="status">
+                            <select class="form-select" id="status" name="status" required>
                                 <option value="active">Active</option>
                                 <option value="inactive">Inactive</option>
                                 <option value="pending">Pending</option>
                                 <option value="suspended">Suspended</option>
                             </select>
                         </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save Alert</button>
+                        </div>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save Alert</button>
                 </div>
             </div>
         </div>
@@ -148,37 +144,39 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="editForm" method="POST">
+                        @csrf
+                        @method('PUT')
                         <div class="mb-3">
                             <label for="editAlertName" class="form-label">Alert Name</label>
-                            <input type="text" class="form-control" id="editAlertName">
+                            <input type="text" class="form-control" id="editAlertName" name="alert_name" required>
                         </div>
                         <div class="mb-3">
                             <label for="editLocation" class="form-label">Location</label>
-                            <input type="text" class="form-control" id="editLocation">
+                            <input type="text" class="form-control" id="editLocation" name="location" required>
                         </div>
                         <div class="mb-3">
                             <label for="editStartDateTime" class="form-label">Start Date & Time</label>
-                            <input type="datetime-local" class="form-control" id="editStartDateTime">
+                            <input type="datetime-local" class="form-control" id="editStartDateTime" name="start_datetime" required>
                         </div>
                         <div class="mb-3">
                             <label for="editEndDateTime" class="form-label">End Date & Time</label>
-                            <input type="datetime-local" class="form-control" id="editEndDateTime">
+                            <input type="datetime-local" class="form-control" id="editEndDateTime" name="end_datetime" required>
                         </div>
                         <div class="mb-3">
                             <label for="editStatus" class="form-label">Status</label>
-                            <select class="form-select" id="editStatus">
+                            <select class="form-select" id="editStatus" name="status" required>
                                 <option value="active">Active</option>
                                 <option value="inactive">Inactive</option>
                                 <option value="pending">Pending</option>
                                 <option value="suspended">Suspended</option>
                             </select>
                         </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save Changes</button>
                 </div>
             </div>
         </div>
@@ -197,7 +195,11 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-danger">Delete</button>
+                    <form id="deleteForm" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -205,33 +207,20 @@
 
     <script>
         // Function to populate the edit form
-        function populateEditForm(alertName, location, startDateTime, endDateTime, status) {
+        function populateEditForm(id, alertName, location, startDateTime, endDateTime, status) {
+            document.getElementById('editForm').action = "{{ route('admin.alerts.update', '') }}/" + id;
             document.getElementById('editAlertName').value = alertName;
             document.getElementById('editLocation').value = location;
-            document.getElementById('editStartDateTime').value = startDateTime;
-            document.getElementById('editEndDateTime').value = endDateTime;
+            document.getElementById('editStartDateTime').value = startDateTime.replace(' ', 'T');
+            document.getElementById('editEndDateTime').value = endDateTime.replace(' ', 'T');
             document.getElementById('editStatus').value = status;
         }
 
-        // Function to set the alert name for deletion
-        function setDeleteAlert(alertName) {
+        // Function to set the alert name and ID for deletion
+        function setDeleteAlert(id, alertName) {
+            document.getElementById('deleteForm').action = "{{ route('admin.alerts.destroy', '') }}/" + id;
             document.getElementById('deleteAlertName').textContent = alertName;
         }
     </script>
-
-
-
-    <!-- Vendor JS Files -->
-    <script src="{{ asset('assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/chart.js/chart.umd.js') }}"></script>
-    <script src="{{ asset('assets/vendor/echarts/echarts.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/quill/quill.js') }}"></script>
-    <script src="{{ asset('assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
-    <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
-
-    <!-- Template Main JS File -->
-    <script src="{{asset('assets/js/main.js')}}"></script>
 
 @endsection
