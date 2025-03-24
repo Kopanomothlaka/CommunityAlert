@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AlertController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\UserController;
@@ -32,9 +33,16 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
 
     // Admin pages
     Route::prefix('/pages')->group(function () {
+
+
         Route::get('/welcome', function () {
             return view('admin.pages.welcome');
         })->name('admin.pages.welcome');
+
+        Route::get('/welcome', [DashboardController::class, 'dashboard'])->name('admin.pages.welcome');
+
+
+
 
         Route::get('/chats', function () {
             return view('admin.pages.chats');

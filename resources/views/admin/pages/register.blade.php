@@ -2,11 +2,7 @@
 
 @section('main-content')
 
-    <!-- Bootstrap Icons CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <div class="pagetitle d-flex justify-content-between align-items-center">
         <h1>Admin List</h1>
@@ -221,15 +217,7 @@
         </div>
     </div>
 
-    <!-- Vendor JS Files -->
-    <script src="{{ asset('assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/chart.js/chart.umd.js') }}"></script>
-    <script src="{{ asset('assets/vendor/echarts/echarts.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/quill/quill.js') }}"></script>
-    <script src="{{ asset('assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
-    <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
+
 
     <!-- Template Main JS File -->
     <script src="{{asset('assets/js/main.js')}}"></script>
