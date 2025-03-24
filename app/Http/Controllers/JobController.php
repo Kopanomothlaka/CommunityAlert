@@ -35,6 +35,27 @@ class JobController extends Controller
         return redirect()->route('admin.pages.jobs')->with('success', 'Job posted successfully!');
     }
 
+    // Update a job posting
+    public function update(Request $request, Job $job)
+    {
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'company' => 'required|string|max:255',
+            'location' => 'required|string|max:255',
+            'min_salary' => 'nullable|numeric',
+            'max_salary' => 'nullable|numeric',
+            'job_type' => 'required|string|max:255',
+            'category' => 'required|string|max:255',
+            'deadline' => 'nullable|date',
+            'description' => 'required|string',
+            'status' => 'required|string|max:255',
+        ]);
+
+        $job->update($validatedData);
+
+        return redirect()->route('admin.pages.jobs')->with('success', 'Job updated successfully!');
+    }
+
     // Delete a job posting
     public function destroy(Job $job)
     {

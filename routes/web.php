@@ -90,7 +90,9 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
         //jobs
             Route::get('/jobs', [JobController::class, 'index'])->name('admin.pages.jobs');
             Route::post('/jobs', [JobController::class, 'store'])->name('admin.jobs.store');
-            Route::delete('/jobs/{job}', [JobController::class, 'destroy'])->name('admin.jobs.destroy');
+        Route::put('/jobs/{job}', [JobController::class, 'update'])->name('admin.jobs.update');
+        Route::delete('/jobs/{job}', [JobController::class, 'destroy'])->name('admin.jobs.destroy');
+
 
 
     });
