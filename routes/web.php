@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AlertController;
+use App\Http\Controllers\JobController;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -85,6 +86,13 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
         Route::post('/alerts/store', [AlertController::class, 'store'])->name('admin.alerts.store');
         Route::put('/alerts/update/{id}', [AlertController::class, 'update'])->name('admin.alerts.update');
         Route::delete('/alerts/delete/{id}', [AlertController::class, 'destroy'])->name('admin.alerts.destroy');
+
+        //jobs
+            Route::get('/jobs', [JobController::class, 'index'])->name('admin.pages.jobs');
+            Route::post('/jobs', [JobController::class, 'store'])->name('admin.jobs.store');
+            Route::delete('/jobs/{job}', [JobController::class, 'destroy'])->name('admin.jobs.destroy');
+
+
     });
 
 
