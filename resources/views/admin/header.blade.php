@@ -35,7 +35,7 @@
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
-                        <h6>Kevin Anderson</h6>
+                        <h6>Admin User</h6>
                         <span>Web Designer</span>
                     </li>
                     <li>
