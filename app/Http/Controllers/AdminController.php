@@ -30,7 +30,7 @@ class AdminController extends Controller
 
         if (Auth::guard('admin')->attempt($credentials, $request->remember)) {
             $request->session()->regenerate();
-            return redirect()->intended(route('admin.dashboard'));
+            return redirect()->intended(route('admin.pages.welcome'));
         }
 
         return back()->withErrors([
